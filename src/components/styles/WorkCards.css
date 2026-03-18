@@ -1,0 +1,65 @@
+.work-cards-container {
+    width: 100%;
+    margin-top: 50px;
+}
+
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    width: 100%;
+}
+
+.work-category-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 35px;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.work-category-card:hover {
+    background: rgba(94, 234, 212, 0.05);
+    border-color: var(--accentColor);
+    transform: translateY(-12px) scale(1.02);
+}
+
+.work-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.work-category-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    color: #fff;
+    font-weight: 700;
+}
+
+.work-category-card p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 20px;
+}
+
+.view-projects {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accentColor);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+    .work-grid {
+        grid-template-columns: 1fr;
+    }
+}

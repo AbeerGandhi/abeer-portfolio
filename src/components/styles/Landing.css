@@ -1,0 +1,181 @@
+.landing-section {
+  width: 100%;
+  max-width: var(--cMaxWidth);
+  margin: auto;
+  position: relative;
+  height: var(--vh);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 10%;
+  overflow: hidden;
+  background-color: #050505;
+}
+
+.landing-container {
+  width: auto;
+  height: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  z-index: 10;
+}
+
+.landing-intro {
+  z-index: 10;
+}
+
+.hello-text {
+  margin: 0;
+  color: var(--accentColor);
+  font-size: clamp(14px, 1.2vw, 20px);
+  font-weight: 500;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  opacity: 1;
+}
+
+.name-text {
+  margin: 0;
+  letter-spacing: -5px;
+  font-size: clamp(60px, 12vw, 180px);
+  line-height: 0.8;
+  font-weight: 900;
+  font-family: 'Syncopate', sans-serif;
+  color: #fff;
+  text-transform: uppercase;
+  display: block;
+  margin-left: -5px;
+}
+
+.name-text .name-last {
+  color: var(--accentColor);
+  /* Optional: slightly different weight or style */
+}
+
+.landing-roles {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-left: 3px solid var(--accentColor);
+  padding-left: 25px;
+}
+
+.role-prefix {
+  font-size: clamp(12px, 1vw, 16px);
+  letter-spacing: 4px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.role-main {
+  position: relative;
+  height: 50px;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.landing-h2-1,
+.landing-h2-2 {
+  font-size: clamp(22px, 3.5vw, 42px);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: 'Outfit', sans-serif;
+  white-space: nowrap;
+}
+
+.landing-h2-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.landing-h2-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Character 2D Placement */
+.character-2d-container {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 55%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 5;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+@media screen and (max-width: 1024px) {
+  .landing-section {
+    padding-left: 5%;
+  }
+
+  .character-2d-container {
+    width: 100%;
+    opacity: 0.4;
+    z-index: 1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .landing-section {
+    padding-left: 0;
+    justify-content: center;
+    flex-direction: column-reverse;
+    /* Putting photo on top for mobile */
+    gap: 30px;
+  }
+
+  .landing-container {
+    text-align: center;
+    align-items: center;
+  }
+
+  .landing-roles {
+    align-items: center;
+    border-left: none;
+    padding-left: 0;
+    margin-top: 20px;
+  }
+
+  .role-main {
+    justify-content: center;
+  }
+
+  .landing-h2-2,
+  .landing-h2-1 {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .name-text {
+    letter-spacing: -2px;
+    font-size: 16vw;
+    line-height: 0.9;
+  }
+
+  .hello-text {
+    letter-spacing: 4px;
+  }
+}
+
+/* Hide old styles */
+.landing-info {
+  display: none;
+}

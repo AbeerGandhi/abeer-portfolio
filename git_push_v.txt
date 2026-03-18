@@ -1,0 +1,25 @@
+﻿git : Pushing to https://gith
+ub.com/AbeerGandhi/abeer-port
+folio.git
+At line:1 char:1
++ git push -v origin main 
+2>&1 | out-file -encoding 
+utf8 git_push_v.txt ...
++ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo           
+   : NotSpecified: (Pushing  
+   to http...r-portfolio.g   
+ it:String) [], RemoteExc    
+eption
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+Git LFS upload failed:
+  (missing) public/models/character.glb (c287a4d10bbbbc4c779f7b0a68b666b530ef9754142843aa048b4d5976c0d052)
+hint: Your push was rejected due to missing or corrupt local objects.
+hint: You can disable this check with: `git config lfs.allowincompletepush true`
+error: failed to push some 
+refs to 'https://github.com/A
+beerGandhi/abeer-portfolio.gi
+t'

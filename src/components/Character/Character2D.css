@@ -1,0 +1,81 @@
+.character-2d-container {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 60%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 5;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.character-2d-image {
+    height: 90vh;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.8));
+    z-index: 2;
+    transform-origin: bottom center;
+}
+
+.character-2d-glow {
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(45, 212, 191, 0.15), transparent 70%);
+    filter: blur(80px);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    right: -10%;
+    bottom: 0;
+    opacity: 0.6;
+}
+
+.character-2d-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 75% 50%, transparent 20%, rgba(0, 0, 0, 0.5) 100%);
+    pointer-events: none;
+    z-index: 6;
+}
+
+@media (max-width: 1024px) {
+    .character-2d-container {
+        width: 100%;
+        justify-content: center;
+        opacity: 0.8;
+        z-index: 1;
+    }
+
+    .character-2d-image {
+        height: 60vh;
+    }
+
+    .character-2d-glow {
+        width: 100vw;
+        height: 100vw;
+        right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .character-2d-container {
+        position: relative;
+        /* Respect flex flow for 'on top' layout */
+        height: 40vh;
+        width: 100%;
+        opacity: 1;
+    }
+
+    .character-2d-image {
+        height: 40vh;
+    }
+
+    .character-2d-vignette {
+        display: none;
+    }
+}

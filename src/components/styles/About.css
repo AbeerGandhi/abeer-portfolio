@@ -1,0 +1,56 @@
+.about-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+  opacity: 1;
+  padding: 15vh 0;
+  width: var(--cWidth);
+  margin: auto;
+  min-height: 60vh;
+}
+
+.about-me {
+  width: 800px;
+  max-width: 90%;
+  text-align: left;
+}
+
+.about-me h3 {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: 400;
+  color: var(--accentColor);
+  margin-bottom: 30px;
+}
+
+.about-me p {
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+@media only screen and (max-width: 1024px) {
+  .about-me p {
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .about-section {
+    padding: 10vh 0;
+  }
+
+  .about-me h3 {
+    font-size: 1.2rem;
+  }
+
+  .about-me p {
+    font-size: 1.5rem;
+  }
+}

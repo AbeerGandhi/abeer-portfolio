@@ -1,0 +1,238 @@
+:root {
+  --loader-bg: #050505;
+  --loader-accent: #2dd4bf;
+  --loader-text: #ffffff;
+}
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--loader-bg);
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: 'Outfit', sans-serif;
+  color: var(--loader-text);
+  transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
+}
+
+.loading-overlay.loaded {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(45, 212, 191, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(45, 212, 191, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(circle, black, transparent 80%);
+  z-index: 1;
+}
+
+.loading-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.loading-header-nav {
+  position: absolute;
+  top: 40px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  letter-spacing: 2px;
+}
+
+.nav-logo {
+  font-weight: 900;
+  font-size: 1.5rem;
+  font-family: 'Syncopate', sans-serif;
+  color: var(--loader-accent);
+}
+
+.nav-status {
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.blink-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--loader-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--loader-accent);
+  animation: blink 1s infinite alternate;
+}
+
+.loading-main-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  width: 100%;
+}
+
+.loading-percent-wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.loading-percent-text {
+  font-size: 12rem;
+  font-weight: 900;
+  line-height: 1;
+  margin: 0;
+  font-family: 'Syncopate', sans-serif;
+  background: linear-gradient(180deg, #fff 0%, #333 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 20px rgba(45, 212, 191, 0.3));
+}
+
+.loading-percent-symbol {
+  font-size: 3rem;
+  font-weight: 300;
+  opacity: 0.4;
+  margin-left: 10px;
+}
+
+.loading-bar-container {
+  width: 300px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 30px auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.loading-bar-fill {
+  height: 100%;
+  background-color: var(--loader-accent);
+  transition: width 0.3s ease-out;
+}
+
+.loading-bar-glow {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-color: var(--loader-accent);
+  filter: blur(8px);
+  opacity: 0.5;
+  transition: width 0.3s ease-out;
+}
+
+.loading-status-wrap {
+  height: 20px;
+  margin-top: 20px;
+}
+
+.loading-status-text {
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  font-weight: 300;
+  text-transform: uppercase;
+  opacity: 0.8;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.loading-footer {
+  position: absolute;
+  bottom: 60px;
+  width: 90%;
+  z-index: 10;
+}
+
+.footer-line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  margin-bottom: 20px;
+}
+
+.footer-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  opacity: 0.4;
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(180deg, transparent, rgba(45, 212, 191, 0.05), transparent);
+  animation: scan 4s linear infinite;
+  z-index: 3;
+}
+
+@keyframes blink {
+  from {
+    opacity: 0.2;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes scan {
+  from {
+    transform: translateY(-100px);
+  }
+
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+@media (max-width: 768px) {
+  .loading-percent-text {
+    font-size: 6rem;
+  }
+
+  .loading-percent-symbol {
+    font-size: 1.5rem;
+  }
+
+  .loading-bar-container {
+    width: 200px;
+  }
+}

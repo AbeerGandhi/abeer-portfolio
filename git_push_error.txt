@@ -1,0 +1,23 @@
+﻿Git LFS upload failed:
+  (missing) public/models/character.glb (c287a4d10bbbbc4c779f7b0a68b666b530ef9754142843aa048b4d5976c0d052)
+Uploading LFS objects:   0% (0/1), 0 B | 0 B/s, done.
+hint: Your push was rejected due to missing or corrupt local objects.
+hint: You can disable this check with: `git config lfs.allowincompletepush true`
+git : error: failed to push 
+some refs to 'https://github.
+com/AbeerGandhi/abeer-portfol
+io.git'
+At line:1 char:1
++ git push -u origin main 
+2>&1 | out-file -encoding 
+utf8 git_push_error ...
++ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo           
+   : NotSpecified: (error:   
+  failed t...-portfolio.gi   
+ t':String) [], RemoteExc    
+eption
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 

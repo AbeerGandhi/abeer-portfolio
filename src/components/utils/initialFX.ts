@@ -13,12 +13,7 @@ export function initialFX() {
     lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      // orientation: "vertical",
-      // gestureOrientation: "vertical",
       smoothWheel: true,
-      // wheelMultiplier: 1,
-      // touchMultiplier: 2,
-      // infinite: false,
     });
 
     const raf = (time: number) => {
@@ -64,6 +59,14 @@ export function initialFX() {
     const landingTextWord1 = new SplitType(".landing-h2-1", { types: "chars", charClass: "split-char" });
     const landingTextWord2 = new SplitType(".landing-h2-2", { types: "chars", charClass: "split-char" });
 
+    // Instantly show the first word correctly
+    gsap.set(".landing-h2-1", { opacity: 1, visibility: 'visible' });
+    gsap.set(landingTextWord1.chars, { y: 0, opacity: 1 });
+
+    // Ensure the second word is hidden properly but ready to fade in
+    gsap.set(".landing-h2-2", { opacity: 1, visibility: 'visible' });
+    gsap.set(landingTextWord2.chars, { y: 80, opacity: 0 });
+
     LoopText(landingTextWord1, landingTextWord2);
   }
 
@@ -78,56 +81,47 @@ export function initialFX() {
 }
 
 function LoopText(Text1: SplitType, Text2: SplitType) {
-  var tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
-  const delay = 4;
-  const delay2 = delay * 2 + 1;
+  const tl = gsap.timeline({ repeat: -1 });
+  const pauseTime = 3; // Time each word stays visible
+  const animTime = 1.2; // Time to transition
 
-  tl.fromTo(
-    Text2.chars,
-    { opacity: 0, y: 80 },
+  // Word 1 (AI/ML) is already visible (set in initialFX)
+
+  // 1. Transition Word 1 out (UP) and Word 2 in (UP from bottom)
+  tl.to(Text1.chars, {
+    y: -80,
+    opacity: 0,
+    duration: animTime,
+    ease: "power3.inOut",
+    stagger: 0.05
+  }, `+=${pauseTime}`);
+
+  tl.fromTo(Text2.chars,
+    { y: 80, opacity: 0 },
     {
-      opacity: 1,
-      duration: 1.2,
-      ease: "power3.inOut",
       y: 0,
-      stagger: 0.05,
-      delay: delay,
-    },
-    0
-  )
-    .fromTo(
-      Text1.chars,
-      { y: 80 },
-      {
-        duration: 1.2,
-        ease: "power3.inOut",
-        y: 0,
-        stagger: 0.05,
-        delay: delay2,
-      },
-      1
-    )
-    .fromTo(
-      Text1.chars,
-      { y: 0 },
-      {
-        y: -80,
-        duration: 1.2,
-        ease: "power3.inOut",
-        stagger: 0.05,
-        delay: delay,
-      },
-      0
-    )
-    .to(
-      Text2.chars,
-      {
-        y: -80,
-        duration: 1.2,
-        ease: "power3.inOut",
-        stagger: 0.05,
-        delay: delay2,
-      },
-      1
-    );
+      opacity: 1,
+      duration: animTime,
+      ease: "power3.inOut",
+      stagger: 0.05
+    }, "<"); // Starts at the same time as the previous animation
+
+  // 2. Transition Word 2 out (UP) and Word 1 in (UP from bottom)
+  tl.to(Text2.chars, {
+    y: -80,
+    opacity: 0,
+    duration: animTime,
+    ease: "power3.inOut",
+    stagger: 0.05
+  }, `+=${pauseTime}`);
+
+  tl.fromTo(Text1.chars,
+    { y: 80, opacity: 0 },
+    {
+      y: 0,
+      opacity: 1,
+      duration: animTime,
+      ease: "power3.inOut",
+      stagger: 0.05
+    }, "<");
 }

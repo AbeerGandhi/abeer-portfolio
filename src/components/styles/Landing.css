@@ -9,7 +9,6 @@
   justify-content: flex-start;
   padding-left: 10%;
   overflow: visible;
-  /* Changed from hidden */
 }
 
 .landing-container {
@@ -62,6 +61,7 @@
   align-items: flex-start;
   border-left: 3px solid var(--accentColor);
   padding-left: 25px;
+  min-height: 100px;
 }
 
 .role-prefix {
@@ -76,10 +76,12 @@
 
 .role-main {
   position: relative;
-  height: 50px;
+  height: clamp(30px, 5vw, 60px);
   display: flex;
   justify-content: flex-start;
   width: 100%;
+  overflow: hidden;
+  /* Prevent text from spilling out while animating */
 }
 
 .landing-h2-1,
@@ -91,18 +93,11 @@
   text-transform: uppercase;
   font-family: 'Outfit', sans-serif;
   white-space: nowrap;
-}
-
-.landing-h2-2 {
   position: absolute;
   top: 0;
   left: 0;
-}
-
-.landing-h2-1 {
-  position: absolute;
-  top: 0;
-  left: 0;
+  opacity: 0;
+  /* Hide initially to avoid overlap before JS kicks in */
 }
 
 @media screen and (max-width: 1024px) {

@@ -4,7 +4,8 @@ import { MdClose, MdOpenInNew } from "react-icons/md";
 const ProjectModal = ({ category, onClose }: { category: any, onClose: () => void }) => {
     return (
         <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            {/* data-lenis-prevent tells Lenis smooth scroll to ignore this element, allowing native scroll inside */}
+            <div className="modal-content" onClick={(e) => e.stopPropagation()} data-lenis-prevent>
                 <button className="modal-close" onClick={onClose} aria-label="Close">
                     <MdClose />
                 </button>

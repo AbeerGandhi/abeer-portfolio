@@ -1,28 +1,38 @@
 .contact-section {
+  width: 100%;
+  max-width: var(--cMaxWidth);
   margin: auto;
-  padding-bottom: 100px;
-  margin-top: 100px;
+  padding: 100px 0;
   position: relative;
-  z-index: 2;
-  background-color: var(--backgroundColor);
+  z-index: 5;
 }
 
-.contact-section h3 {
-  font-size: 60px;
-  font-weight: 400;
+.contact-container {
+  width: 100%;
+}
+
+.contact-header {
+  margin-bottom: 80px;
+}
+
+.contact-header h3 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
   text-transform: uppercase;
   margin: 0;
+  color: #fff;
+  line-height: 1;
+}
+
+.contact-header span {
+  color: var(--accentColor);
 }
 
 .contact-flex {
-  display: flex;
-  justify-content: space-between;
-}
-
-.contact-flex h4 {
-  font-weight: 500;
-  margin: 0;
-  opacity: 0.6;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5fr;
+  gap: 60px;
+  align-items: flex-start;
 }
 
 .contact-box {
@@ -30,87 +40,123 @@
   flex-direction: column;
 }
 
-.contact-flex p {
-  margin-top: 10px;
+.contact-box h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0 0 20px 0;
+  color: var(--accentColor);
+  opacity: 0.8;
+}
+
+.contact-box .contact-link {
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.contact-box .contact-link:hover {
+  color: var(--accentColor);
+  transform: translateX(10px);
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-social {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 8px;
+  width: fit-content;
+}
+
+.contact-social svg {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.contact-social:hover {
+  color: #fff;
+  border-bottom-color: var(--accentColor);
+  padding-left: 10px;
+}
+
+.contact-social:hover svg {
+  transform: translate(5px, -5px);
+}
+
+.contact-info-text {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.5);
   margin-bottom: 20px;
 }
 
-a.contact-social {
-  font-size: 25px;
-  border-bottom: 1px solid #ccc;
+.contact-footer-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
 }
 
-.contact-box h2 {
-  font-weight: 400;
-  font-size: 23px;
-  margin: 0;
+.contact-footer-box h2 {
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 30px 0;
+  color: #fff;
 }
 
-.contact-box h2>span {
+.contact-footer-box h2 span {
   color: var(--accentColor);
 }
 
-.contact-box h5 {
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 20px;
+.copyright-text {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.3);
   display: flex;
-  gap: 10px;
-  opacity: 0.5;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
 }
 
-@media only screen and (max-width: 1600px) {
-  .contact-section h3 {
-    font-size: 50px;
-  }
-
-  .contact-box h2 {
-    font-size: 20px;
-  }
-
-  a.contact-social {
-    font-size: 22px;
-  }
-}
-
-@media only screen and (max-width: 1300px) {
-  .contact-section h3 {
-    font-size: 40px;
-  }
-
-  .contact-box h2 {
-    font-size: 18px;
-  }
-
-  a.contact-social {
-    font-size: 20px;
-  }
-
-  .contact-flex p {
-    margin-top: 0px;
-  }
-}
-
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1024px) {
   .contact-flex {
-    flex-direction: column;
+    grid-template-columns: 1fr 1fr;
     gap: 40px;
   }
 
-  .contact-flex p {
-    margin-bottom: 0px;
+  .contact-footer-box {
+    grid-column: span 2;
+    margin-top: 40px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .contact-flex {
+    grid-template-columns: 1fr;
+    gap: 50px;
   }
 
-  .contact-flex h4 {
-    margin-top: 20px;
+  .contact-footer-box {
+    grid-column: span 1;
   }
 
-  .contact-section {
-    margin-top: 50px;
-    padding-bottom: 50px;
-  }
-
-  .contact-container {
-    width: calc(100% - 25px);
+  .contact-header {
+    margin-bottom: 50px;
   }
 }

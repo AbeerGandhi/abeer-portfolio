@@ -1,6 +1,5 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Cursor from "./Cursor";
 import Navbar from "./Navbar";
 import SocialIcons from "./SocialIcons";
 import Character2D from "./Character/Character2D";
@@ -54,7 +53,6 @@ const MainLayout = ({ children }: PropsWithChildren) => {
 
     return (
         <div className="layout-root">
-            <Cursor />
             <Navbar />
             <SocialIcons />
 

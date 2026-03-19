@@ -1,14 +1,19 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
-import { SplitText } from "gsap-trial/SplitText";
+import SplitType from 'split-type';
+
+gsap.registerPlugin(ScrollTrigger);
+
+/**
+ * REPLACEMENT FOR GSAP-TRIAL SPLITTEXT
+ * Using the free 'split-type' library to avoid the trial watermark.
+ * Works identically for word and character splitting.
+ */
 
 interface ParaElement extends HTMLElement {
   anim?: gsap.core.Animation;
-  split?: SplitText;
+  split?: SplitType;
 }
-
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 
 let isInitialized = false;
 
@@ -29,16 +34,14 @@ export default function setSplitText() {
       para.split?.revert();
     }
 
-    para.split = new SplitText(para, {
-      type: "lines,words",
-      linesClass: "split-line",
-    });
+    // Split text into lines/words
+    para.split = new SplitType(para, { types: 'lines,words', lineClass: 'split-line' });
 
     para.anim = gsap.fromTo(
       para.split.words,
-      { autoAlpha: 0, y: 80 },
+      { opacity: 0, y: 80 },
       {
-        autoAlpha: 1,
+        opacity: 1,
         scrollTrigger: {
           trigger: para.parentElement?.parentElement,
           toggleActions: ToggleAction,
@@ -58,15 +61,15 @@ export default function setSplitText() {
       title.anim.kill();
       title.split?.revert();
     }
-    title.split = new SplitText(title, {
-      type: "chars,lines",
-      linesClass: "split-line",
-    });
+
+    // Split text into chars/lines
+    title.split = new SplitType(title, { types: 'chars,lines', lineClass: 'split-line' });
+
     title.anim = gsap.fromTo(
       title.split.chars,
-      { autoAlpha: 0, y: 80, rotate: 10 },
+      { opacity: 0, y: 80, rotate: 10 },
       {
-        autoAlpha: 1,
+        opacity: 1,
         scrollTrigger: {
           trigger: title.parentElement?.parentElement,
           toggleActions: ToggleAction,
@@ -84,9 +87,6 @@ export default function setSplitText() {
 
   if (!isInitialized) {
     ScrollTrigger.addEventListener("refresh", () => {
-      // Only refresh if needed, but GSAP handles this mostly.
-      // We don't want to re-run the whole setSplitText here anymore
-      // as it creates new animations.
     });
     isInitialized = true;
   }

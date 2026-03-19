@@ -1,10 +1,32 @@
-import { SplitText } from "gsap-trial/SplitText";
 import gsap from "gsap";
-import { smoother } from "../Navbar";
+import SplitType from "split-type";
+import Lenis from "lenis";
+
+// Initial transition effects that are free from GSAP watermarks
+export let lenis: Lenis | null = null;
 
 export function initialFX() {
   document.body.style.overflowY = "auto";
-  if (smoother) smoother.paused(false);
+
+  // Initialize Lenis for smooth scrolling (Free alternative to ScrollSmoother)
+  if (!lenis) {
+    lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      // orientation: "vertical",
+      // gestureOrientation: "vertical",
+      smoothWheel: true,
+      // wheelMultiplier: 1,
+      // touchMultiplier: 2,
+      // infinite: false,
+    });
+
+    const raf = (time: number) => {
+      lenis?.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+  }
 
   // Ensure content is visible
   const main = document.querySelector(".main-content-area");
@@ -20,16 +42,13 @@ export function initialFX() {
 
   const landingIntro = document.querySelector(".landing-intro");
   if (landingIntro) {
-    const landingText = new SplitText(
-      [".hello-text", ".name-text", ".role-prefix"],
-      {
-        type: "chars,lines",
-        linesClass: "split-line",
-      }
-    );
+    // Replace GSAP SplitText with free SplitType
+    const helloText = new SplitType(".hello-text", { types: "chars,lines" });
+    const nameText = new SplitType(".name-text", { types: "chars,lines" });
+    const rolePrefix = new SplitType(".role-prefix", { types: "chars,lines" });
 
     gsap.fromTo(
-      landingText.chars,
+      [helloText.chars, nameText.chars, rolePrefix.chars],
       { opacity: 0, y: 80, filter: "blur(5px)" },
       {
         opacity: 1,
@@ -42,10 +61,8 @@ export function initialFX() {
       }
     );
 
-    let TextProps = { type: "chars,lines", linesClass: "split-h2" };
-
-    const landingTextWord1 = new SplitText(".landing-h2-1", TextProps);
-    const landingTextWord2 = new SplitText(".landing-h2-2", TextProps);
+    const landingTextWord1 = new SplitType(".landing-h2-1", { types: "chars", charClass: "split-char" });
+    const landingTextWord2 = new SplitType(".landing-h2-2", { types: "chars", charClass: "split-char" });
 
     LoopText(landingTextWord1, landingTextWord2);
   }
@@ -60,7 +77,7 @@ export function initialFX() {
   }
 }
 
-function LoopText(Text1: SplitText, Text2: SplitText) {
+function LoopText(Text1: SplitType, Text2: SplitType) {
   var tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
   const delay = 4;
   const delay2 = delay * 2 + 1;

@@ -9,7 +9,7 @@
   height: auto;
   margin: auto;
   margin-bottom: 250px;
-  padding: 120px 0px;
+  padding: 40px 0px;
 }
 
 .career-section h2 {
@@ -84,24 +84,27 @@
 
 .career-timeline {
   position: absolute;
-  top: -50px;
+  top: 0px;
+  /* Align with top-most role */
   left: 50%;
   transform: translateX(-50%);
   width: 3px;
   height: 100%;
-  background-image: linear-gradient(to top,
-      #14b8a6 20%,
-      var(--accentColor) 50%,
-      transparent 95%);
-  max-height: 0%;
+  background-image: linear-gradient(to bottom,
+      #5eead4 0%,
+      /* Accent at the top (Present) */
+      #14b8a6 40%,
+      transparent 100%);
+  max-height: 100%;
 }
 
 .career-dot {
   position: absolute;
-  bottom: 0;
+  top: 0;
+  /* Changed to TOP to highlight current roles */
   left: 50%;
-  transform: translate(-50%, 50%);
-  background-color: #14b8a6;
+  transform: translate(-50%, -50%);
+  background-color: #5eead4;
   width: 10px;
   height: 10px;
   border-radius: 50px;
@@ -126,17 +129,6 @@
   100%,
   64%,
   80% {
-    box-shadow: 0px 0px 5px 2px #67e8f9, 0px 0px 15px 5px #5eead4,
-      0px 0px 110px 20px #a5f3fc;
-  }
-}
-
-@keyframes timeline2 {
-  0% {
-    box-shadow: 0px 0px 5px 2px #67e8f9;
-  }
-
-  100% {
     box-shadow: 0px 0px 5px 2px #67e8f9, 0px 0px 15px 5px #5eead4,
       0px 0px 110px 20px #a5f3fc;
   }

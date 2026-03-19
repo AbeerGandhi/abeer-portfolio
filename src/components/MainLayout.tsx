@@ -1,11 +1,11 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Navbar, { smoother } from "./Navbar";
+import Navbar from "./Navbar";
 import SocialIcons from "./SocialIcons";
 import Character2D from "./Character/Character2D";
 import setSplitText from "./utils/splitText";
 import { setCharTimeline, setAllTimeline } from "./utils/GsapScroll";
-import { initialFX } from "./utils/initialFX";
+import { initialFX, lenis } from "./utils/initialFX";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const MainLayout = ({ children }: PropsWithChildren) => {
@@ -15,24 +15,25 @@ const MainLayout = ({ children }: PropsWithChildren) => {
     const location = useLocation();
 
     useEffect(() => {
-        // Initial reveal
+        // Initial reveal and Lenis setup
         initialFX();
     }, []);
 
     // Refresh animations on route change
     useEffect(() => {
         // Force scroll to top immediately on route change
-        if (smoother) {
-            smoother.scrollTop(0);
+        if (lenis) {
+            lenis.scrollTo(0, { immediate: true });
         } else {
             window.scrollTo(0, 0);
         }
 
         // Wait a bit longer for React to finish rendering the new page
         const timer = setTimeout(() => {
-            if (smoother) {
-                smoother.scrollTop(0);
-                smoother.refresh();
+            if (lenis) {
+                lenis.scrollTo(0, { immediate: true });
+                // @ts-ignore
+                ScrollTrigger.refresh();
             } else {
                 window.scrollTo(0, 0);
             }
@@ -42,7 +43,7 @@ const MainLayout = ({ children }: PropsWithChildren) => {
             setSplitText();
             initialFX();
             ScrollTrigger.refresh();
-        }, 150); // Reduced delay for better feel
+        }, 150);
 
         return () => clearTimeout(timer);
     }, [location.pathname]);
@@ -54,7 +55,6 @@ const MainLayout = ({ children }: PropsWithChildren) => {
             timeoutId = window.setTimeout(() => {
                 setSplitText();
                 setIsDesktopView(window.innerWidth > 1024);
-                if (smoother) smoother.refresh();
                 ScrollTrigger.refresh();
             }, 250);
         };

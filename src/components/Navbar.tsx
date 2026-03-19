@@ -3,35 +3,17 @@ import { Link, useLocation } from "react-router-dom";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
-import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
+import { lenis } from "./utils/initialFX";
 import "./styles/Navbar.css";
 
-gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
-
-export let smoother: ScrollSmoother | null = null;
+gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Re-initialize smoother on mount
-    smoother = ScrollSmoother.create({
-      wrapper: "#smooth-wrapper",
-      content: "#smooth-content",
-      smooth: 1.2,
-      speed: 1.2,
-      effects: true,
-      autoResize: true,
-      ignoreMobileResize: true,
-    });
-
-    if (smoother) {
-      smoother.scrollTop(0);
-      smoother.paused(false);
-    }
-
     const resizeHandler = () => {
-      if (smoother) smoother.refresh(true);
+      ScrollTrigger.refresh();
     };
 
     window.addEventListener("resize", resizeHandler);
@@ -42,8 +24,8 @@ const Navbar = () => {
 
   // Sync on route change
   useEffect(() => {
-    if (smoother) {
-      smoother.scrollTop(0);
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
       ScrollTrigger.refresh();
     }
   }, [location.pathname]);

@@ -32,11 +32,12 @@ const getIconUrl = (skill: string) => {
     return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${mapping[skill]}`;
   }
 
-  // Custom fallbacks
-  if (skill === "ElevenLabs") return "https://logo.clearbit.com/elevenlabs.io";
-  if (skill === "n8n") return "https://logo.clearbit.com/n8n.io";
-  if (skill === "Vapi") return "https://logo.clearbit.com/vapi.ai";
+  // Super-reliable direct assets for hard-to-find logos
+  if (skill === "ElevenLabs") return "https://elevenlabs.io/static/images/logo-icon.png";
+  if (skill === "n8n") return "https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-logo.png";
+  if (skill === "Vapi") return "https://vapi.ai/favicon.ico";
 
+  // Default fallback
   return `https://ui-avatars.com/api/?name=${encodeURIComponent(skill)}&background=1a1f26&color=5eead4&bold=true&size=128`;
 };
 
@@ -112,7 +113,15 @@ const TechStack = () => {
                 {cat.skills.map((skill, sIdx) => (
                   <div className="skill-item" key={sIdx}>
                     <div className="skill-logo-box">
-                      <img src={getIconUrl(skill)} alt={skill} loading="lazy" />
+                      <img
+                        src={getIconUrl(skill)}
+                        alt={skill}
+                        loading="lazy"
+                        onError={(e) => {
+                          // Secondary fallback if primary URL fails
+                          (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(skill)}&background=1a1f26&color=5eead4&bold=true`;
+                        }}
+                      />
                     </div>
                     <span>{skill}</span>
                   </div>

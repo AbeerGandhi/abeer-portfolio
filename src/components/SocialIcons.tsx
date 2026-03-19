@@ -3,13 +3,12 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa6";
 import "./styles/SocialIcons.css";
-import { TbNotes } from "react-icons/tb";
 import { useEffect } from "react";
-import HoverLinks from "./HoverLinks";
 
 const SocialIcons = () => {
   useEffect(() => {
-    const social = document.getElementById("social") as HTMLElement;
+    const social = document.getElementById("social");
+    if (!social) return;
 
     social.querySelectorAll("span").forEach((item) => {
       const elem = item as HTMLElement;
@@ -25,8 +24,10 @@ const SocialIcons = () => {
         currentX += (mouseX - currentX) * 0.1;
         currentY += (mouseY - currentY) * 0.1;
 
-        link.style.setProperty("--siLeft", `${currentX}px`);
-        link.style.setProperty("--siTop", `${currentY}px`);
+        if (link) {
+          link.style.setProperty("--siLeft", `${currentX}px`);
+          link.style.setProperty("--siTop", `${currentY}px`);
+        }
 
         requestAnimationFrame(updatePosition);
       };
@@ -45,11 +46,10 @@ const SocialIcons = () => {
       };
 
       document.addEventListener("mousemove", onMouseMove);
-
       updatePosition();
 
       return () => {
-        elem.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mousemove", onMouseMove);
       };
     });
   }, []);
@@ -58,23 +58,16 @@ const SocialIcons = () => {
     <div className="icons-section">
       <div className="social-icons" data-cursor="icons" id="social">
         <span>
-          <a href="https://github.com/AbeerGandhi" target="_blank">
+          <a href="https://github.com/AbeerGandhi" target="_blank" rel="noopener noreferrer">
             <FaGithub />
           </a>
         </span>
         <span>
-          <a href="https://www.linkedin.com/in/abeer-gandhi-22133726a/" target="_blank">
+          <a href="https://www.linkedin.com/in/abeer-gandhi-22133726a/" target="_blank" rel="noopener noreferrer">
             <FaLinkedinIn />
           </a>
         </span>
-
       </div>
-      <a className="resume-button" href="#">
-        <HoverLinks text="RESUME" />
-        <span>
-          <TbNotes />
-        </span>
-      </a>
     </div>
   );
 };

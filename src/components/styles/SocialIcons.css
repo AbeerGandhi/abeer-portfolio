@@ -1,19 +1,15 @@
 .icons-section {
   position: fixed;
-  max-width: var(--cMaxWidth);
-  width: var(--cWidth);
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 100vh;
+  inset: 0;
   pointer-events: none;
   z-index: 999;
 }
 
 .social-icons {
   position: absolute;
-  left: 0px;
-  top: 140px;
+  left: 30px;
+  bottom: 40px;
+  /* Moved to bottom left to avoid overlapping content headers */
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -42,8 +38,7 @@
   font-size: 26px;
   color: #fff;
   opacity: 0.6;
-  will-change: left, top;
-  transition: opacity 0.3s ease, transform 0.3s ease-out;
+  transition: opacity 0.3s ease, color 0.3s ease;
 }
 
 .social-icons a:hover {
@@ -51,55 +46,27 @@
   color: var(--accentColor);
 }
 
-.resume-button {
-  position: absolute;
-  z-index: 99;
-  display: flex;
-  gap: 10px;
-  bottom: 0px;
-  right: 0px;
-  width: auto;
-  text-wrap: nowrap;
-  letter-spacing: 4px;
-  font-size: 15px;
-  line-height: 15px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.4);
-  cursor: pointer;
-  transition: 0.5s;
-  pointer-events: all;
-  transform-origin: left bottom;
-  transform: translateX(100%) rotateZ(-90deg);
-  /* Reverting the rotation for consistent vertical style */
-}
-
-.resume-button:hover {
-  color: #fff;
-}
-
-@media only screen and (max-width: 768px) {
+/* Response: On mobile, move to more compact layout or hide if needed */
+@media only screen and (max-width: 900px) {
   .social-icons {
-    display: flex;
-    top: 90px;
+    left: 20px;
+    bottom: 30px;
     gap: 15px;
   }
 
   .social-icons a {
-    font-size: 22px;
-  }
-
-  .resume-button {
-    bottom: 120px;
-    font-size: 14px;
+    font-size: 20px;
   }
 }
 
-@media only screen and (min-width: 1200px) {
+/* Ensure icons don't block mobile navigation or interactions */
+@media only screen and (max-width: 480px) {
   .social-icons {
-    top: 180px;
-  }
-
-  .social-icons a {
-    font-size: 28px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 12px;
+    border-radius: 30px;
+    backdrop-filter: blur(5px);
+    left: 15px;
+    bottom: 20px;
   }
 }

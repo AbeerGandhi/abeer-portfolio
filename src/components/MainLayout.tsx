@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Navbar from "./Navbar";
+import Navbar, { smoother } from "./Navbar";
 import SocialIcons from "./SocialIcons";
 import Character2D from "./Character/Character2D";
 import setSplitText from "./utils/splitText";
@@ -21,15 +21,29 @@ const MainLayout = ({ children }: PropsWithChildren) => {
 
     // Refresh animations on route change
     useEffect(() => {
+        // Force scroll to top immediately on route change
+        if (smoother) {
+            smoother.scrollTop(0);
+        } else {
+            window.scrollTo(0, 0);
+        }
+
         // Wait a bit longer for React to finish rendering the new page
         const timer = setTimeout(() => {
-            window.scrollTo(0, 0);
+            if (smoother) {
+                smoother.scrollTop(0);
+                smoother.refresh();
+            } else {
+                window.scrollTo(0, 0);
+            }
+
             setCharTimeline();
             setAllTimeline();
             setSplitText();
             initialFX();
             ScrollTrigger.refresh();
-        }, 300);
+        }, 150); // Reduced delay for better feel
+
         return () => clearTimeout(timer);
     }, [location.pathname]);
 
@@ -40,6 +54,7 @@ const MainLayout = ({ children }: PropsWithChildren) => {
             timeoutId = window.setTimeout(() => {
                 setSplitText();
                 setIsDesktopView(window.innerWidth > 1024);
+                if (smoother) smoother.refresh();
                 ScrollTrigger.refresh();
             }, 250);
         };

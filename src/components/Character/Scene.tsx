@@ -123,7 +123,7 @@ const Scene = () => {
       animate();
 
       const onResize = () => {
-        handleResize(renderer, camera, canvasDiv, characterModel!);
+        handleResize(renderer, camera, canvasDiv);
       };
       window.addEventListener("resize", onResize);
 

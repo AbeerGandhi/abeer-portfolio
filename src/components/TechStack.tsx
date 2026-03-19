@@ -1,9 +1,5 @@
-import { useRef, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
 import "./styles/TechStack.css";
-
-gsap.registerPlugin(ScrollTrigger);
 
 // Mapping skill names to DevIcon names or fallback URLs
 const getIconUrl = (skill: string) => {
@@ -32,30 +28,29 @@ const getIconUrl = (skill: string) => {
     return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${mapping[skill]}`;
   }
 
-  // Super-reliable direct assets for hard-to-find logos
-  if (skill === "ElevenLabs") return "https://elevenlabs.io/static/images/logo-icon.png";
+  // Custom fallbacks
+  if (skill === "ElevenLabs") return "https://logo.clearbit.com/elevenlabs.io";
   if (skill === "n8n") return "https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-logo.png";
   if (skill === "Vapi") return "https://vapi.ai/favicon.ico";
 
-  // Default fallback
   return `https://ui-avatars.com/api/?name=${encodeURIComponent(skill)}&background=1a1f26&color=5eead4&bold=true&size=128`;
 };
 
 const skillCategories = [
   {
     category: "Languages",
-    skills: ["Python", "JavaScript", "C++", "C", "TypeScript"]
+    skills: ["Python", "JS", "C++", "C", "TS"]
   },
   {
     category: "Frameworks & Web",
-    skills: ["React.js", "Next.js", "Flask", "Node.js", "HTML", "CSS", "WordPress"]
+    skills: ["React", "Next", "Flask", "Node", "Wordpress"]
   },
   {
-    category: "AI / ML & Databases",
-    skills: ["LLMs", "NLP", "Deep Learning", "RAG", "MongoDB", "MySQL", "Supabase"]
+    category: "AI/ML & Databases",
+    skills: ["LLMs", "NLP", "RAG", "Mongo", "SQL", "Supabase"]
   },
   {
-    category: "Automation & Tools",
+    category: "Auto & Tools",
     skills: ["n8n", "ElevenLabs", "Vapi", "GitHub", "Postman", "GCP"]
   }
 ];
@@ -63,39 +58,9 @@ const skillCategories = [
 const TechStack = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    // Ensure visibility on mount
-    if (sectionRef.current) {
-      sectionRef.current.style.opacity = '1';
-      sectionRef.current.style.visibility = 'visible';
-    }
-
-    const ctx = gsap.context(() => {
-      // Force refresh ScrollTrigger to detect position accurately on load
-      ScrollTrigger.refresh();
-
-      gsap.fromTo(".skill-category",
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.1,
-          duration: 0.8,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 90%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
+  // Removed all complex GSAP reveal logic to ensure immediate normal website behavior
   return (
-    <section className="techstack-2d" id="techstack" ref={sectionRef}>
+    <section className="techstack-2d visible" id="techstack" ref={sectionRef}>
       <div className="tech-container">
         <div className="tech-header">
           <h3 className="tech-subtitle">Proficiencies</h3>
@@ -118,7 +83,6 @@ const TechStack = () => {
                         alt={skill}
                         loading="lazy"
                         onError={(e) => {
-                          // Secondary fallback if primary URL fails
                           (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(skill)}&background=1a1f26&color=5eead4&bold=true`;
                         }}
                       />

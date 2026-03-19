@@ -1,6 +1,7 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom";
 import "./styles/WhatIDoCards.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -10,13 +11,15 @@ const services = [
         title: "AI / ML Developer",
         description: "Specializing in building agentic AI systems, LLM-powered applications, and conversational voice agents. Experienced in designing RAG-based architectures, NLP resume analyzers, and complex automation workflows.",
         skills: ["Python", "LLMs", "n8n", "RAG", "NLP", "Voice Agents (Vapi/ElevenLabs)", "Prompt Engineering", "Flask", "MongoDB"],
-        icon: "🤖"
+        icon: "🤖",
+        link: "/work"
     },
     {
         title: "Frontend Developer",
         description: "Creating high-performance, pixel-perfect web applications with modern technologies. Expertise in building kiosk-based resort apps, real-time automation dashboards, and production-ready simulation tools.",
         skills: ["React.js", "Next.js", "TypeScript", "GSAP", "HTML5", "CSS3", "WordPress", "REST APIs"],
-        icon: "💻"
+        icon: "💻",
+        link: "/work"
     }
 ];
 
@@ -56,7 +59,10 @@ const WhatIDoCards = () => {
 
     return (
         <div className="what-i-do-cards" ref={sectionRef}>
-            <h2 className="section-title">What I <span>Do</span></h2>
+            <div className="what-i-do-intro">
+                <h3 className="intro-subtitle">Services</h3>
+                <h2 className="section-title">What I <span>Do</span></h2>
+            </div>
             <div className="services-grid">
                 {services.map((service, index) => (
                     <div className="service-card" key={index}>
@@ -68,6 +74,9 @@ const WhatIDoCards = () => {
                                 <span key={tag}>{tag}</span>
                             ))}
                         </div>
+                        <Link to={service.link} className="see-projects-btn" data-cursor="disable">
+                            See Projects <span>→</span>
+                        </Link>
                     </div>
                 ))}
             </div>

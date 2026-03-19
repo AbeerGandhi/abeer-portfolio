@@ -5,7 +5,6 @@ const Landing = ({ children }: PropsWithChildren) => {
   return (
     <>
       <div className="landing-section" id="landingDiv">
-        {children}
         <div className="landing-container">
           <div className="landing-intro">
             <h2 className="hello-text">Hello! I'm</h2>
@@ -22,6 +21,7 @@ const Landing = ({ children }: PropsWithChildren) => {
             </div>
           </div>
         </div>
+        {children}
       </div>
     </>
   );

@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Cursor from "./Cursor";
 import Navbar from "./Navbar";
 import SocialIcons from "./SocialIcons";
+import Character2D from "./Character/Character2D";
 import setSplitText from "./utils/splitText";
 import { setCharTimeline, setAllTimeline } from "./utils/GsapScroll";
 import { initialFX } from "./utils/initialFX";
@@ -56,9 +57,27 @@ const MainLayout = ({ children }: PropsWithChildren) => {
             <Cursor />
             <Navbar />
             <SocialIcons />
+
             <div id="smooth-wrapper">
                 <div id="smooth-content">
-                    <main className="main-content-area">
+                    {/* 
+                       Placing character INSIDE the smooth-content ensures 
+                       multi-page persistent background while also scrolling naturally.
+                       We place it BEFORE main content area but use its CSS for layering.
+                    */}
+                    <div className={`character-wrapper ${location.pathname === "/" ? "home-state" : "bg-state"}`} style={{
+                        position: 'absolute',
+                        top: 0,
+                        right: 0,
+                        width: '100%',
+                        height: '100vh',
+                        pointerEvents: 'none',
+                        zIndex: 5 /* Between background (0) and text (10) */
+                    }}>
+                        <Character2D />
+                    </div>
+
+                    <main className="main-content-area" style={{ position: 'relative', zIndex: 10 }}>
                         {children}
                     </main>
                 </div>

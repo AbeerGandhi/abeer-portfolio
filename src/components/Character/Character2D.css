@@ -1,81 +1,75 @@
 .character-2d-container {
     position: absolute;
+    /* Changed from fixed so it moves with scrolling */
     right: 0;
-    bottom: 0;
-    height: 100%;
-    width: 60%;
+    top: 0;
+    height: 100vh;
+    width: 55%;
     display: flex;
     align-items: flex-end;
-    justify-content: center;
-    z-index: 5;
+    justify-content: flex-end;
+    z-index: 1;
+    /* Keep it as a background element */
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    padding-right: 0;
+    overflow: hidden;
+}
+
+/* Home Page State - Prominent on the right side of the name but scrolls away */
+.home-state .character-2d-container {
+    opacity: 0.9;
+    transform: translateX(0);
+}
+
+/* Background State for other pages - Subtle watermark that moves with content */
+.bg-state .character-2d-container {
+    opacity: 0.15;
+    transform: translateX(40px);
 }
 
 .character-2d-image {
-    height: 90vh;
+    height: 95vh;
     width: auto;
     object-fit: contain;
-    filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.8));
+    filter: drop-shadow(0 0 40px rgba(0, 0, 0, 0.3));
     z-index: 2;
-    transform-origin: bottom center;
+    transform-origin: bottom right;
 }
 
 .character-2d-glow {
     position: absolute;
-    width: 60vw;
-    height: 60vw;
-    background: radial-gradient(circle, rgba(45, 212, 191, 0.15), transparent 70%);
+    width: 70vw;
+    height: 70vw;
+    background: radial-gradient(circle, rgba(94, 234, 212, 0.08), transparent 75%);
     filter: blur(80px);
     border-radius: 50%;
     pointer-events: none;
     z-index: 1;
-    right: -10%;
-    bottom: 0;
-    opacity: 0.6;
-}
-
-.character-2d-vignette {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 75% 50%, transparent 20%, rgba(0, 0, 0, 0.5) 100%);
-    pointer-events: none;
-    z-index: 6;
+    right: -5%;
+    bottom: -5%;
 }
 
 @media (max-width: 1024px) {
     .character-2d-container {
         width: 100%;
         justify-content: center;
-        opacity: 0.8;
-        z-index: 1;
     }
 
     .character-2d-image {
-        height: 60vh;
-    }
-
-    .character-2d-glow {
-        width: 100vw;
-        height: 100vw;
-        right: 0;
+        height: 70vh;
     }
 }
 
 @media (max-width: 768px) {
-    .character-2d-container {
-        position: relative;
-        /* Respect flex flow for 'on top' layout */
+    .home-state .character-2d-container {
+        opacity: 0.6;
         height: 40vh;
-        width: 100%;
-        opacity: 1;
+        position: relative;
+        margin-top: 20px;
     }
 
     .character-2d-image {
         height: 40vh;
-    }
-
-    .character-2d-vignette {
-        display: none;
     }
 }

@@ -2,18 +2,18 @@
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 999;
+  z-index: 10002;
+  /* Ensure it stays above the side-drawer overlay if needed */
 }
 
 .social-icons {
   position: absolute;
   left: 30px;
   bottom: 40px;
-  /* Moved to bottom left to avoid overlapping content headers */
   display: flex;
   flex-direction: column;
   gap: 25px;
-  z-index: 1000;
+  z-index: 10003;
   pointer-events: all;
   padding: 10px 0;
 }
@@ -46,7 +46,7 @@
   color: var(--accentColor);
 }
 
-/* Response: On mobile, move to more compact layout or hide if needed */
+/* Response: On mobile, move to more compact layout and reduce the 'big' background */
 @media only screen and (max-width: 900px) {
   .social-icons {
     left: 20px;
@@ -59,14 +59,23 @@
   }
 }
 
-/* Ensure icons don't block mobile navigation or interactions */
 @media only screen and (max-width: 480px) {
   .social-icons {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 12px;
-    border-radius: 30px;
-    backdrop-filter: blur(5px);
-    left: 15px;
-    bottom: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    /* Stronger but smaller */
+    padding: 8px;
+    /* Reduced from 12px */
+    border-radius: 20px;
+    /* Reduced roundness */
+    backdrop-filter: blur(8px);
+    left: 12px;
+    bottom: 12px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+  }
+
+  .social-icons span {
+    width: 32px;
+    /* Smaller icons for small screens */
+    height: 32px;
   }
 }
